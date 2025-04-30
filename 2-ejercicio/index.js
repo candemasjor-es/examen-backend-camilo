@@ -6,35 +6,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const minmax = [
-  {
-    number: 7,
-    min: 7,
-    max: 7,
-  },
-  {
-    number: 2,
-    min: 2,
-    max: 7,
-  },
-  {
-    number: 9,
-    min: 3,
-    max: 7,
-  },
-];
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+const numbers = [];
 
 app.post("/minmax", (req, res) => {
-  minmax.push({
-    number: req.body.number,
-    min: req.body.min,
-    max: req.body.max,
-  });
-  res.sendStatus(201);
+  const { number } = req.body;
+  numbers.push(number);
+
+  const min = Math.min(...numbers);
+  const max = Math.max(...numbers);
+
+  res.status(201).json({ min, max });
 });
 
 app.listen(post, () => {

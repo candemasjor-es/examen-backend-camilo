@@ -7,9 +7,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const comida = [
+const comidas = [
   {
-    nombra: "pizza",
+    nombre: "pizza",
   },
   {
     nombre: "hamburguesa",
@@ -20,18 +20,10 @@ const comida = [
 ];
 
 app.get("/comidas", (req, res) => {
-  const comidas = res.json(comida);
-  fetch(comidas)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      res.status(200).json(data);
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    });
+  const comidaAleatoria = comidas[Math.floor(Math.random() * comidas.length)];
+  res.json({ comida: comidaAleatoria.nombre });
 });
+
 app.listen(post, () => {
   console.log("Example app listening on port http://localhost:" + post);
 });
