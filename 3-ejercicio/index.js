@@ -9,7 +9,7 @@ app.put("/users", (res, req) => {
 });
 
 //el codigo corregido
-app.put("/users", (res, req) => {
+app.delete("/users", (res, req) => {
   const userId = req.params.id;
   const sql = "DELETE FROM users WHERE id=${userId}";
   db.query(sql, (error, result) => {
